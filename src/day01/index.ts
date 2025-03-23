@@ -1,6 +1,21 @@
-import fs from 'fs';
+import { Day } from "../day.js";
 
-fs.readFile('./test.txt', (err, data) => {
-    if (err) throw err;
-    console.log(data);
-});
+class Day01 extends Day {
+    constructor(){
+        super(1);
+    }
+
+    solveForPartTest(input: string): string {
+        return input;
+    }
+
+    solveForPartOne(input: string): string {
+        return input;
+    }
+
+    solveForPartTwo(input: string): string {
+        return input;
+    }
+}
+
+export default new Day01;

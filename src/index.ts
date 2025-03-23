@@ -1,8 +1,8 @@
 import { Day } from './day.js';
-import day0 from './day0/index';
+import day01 from './day01/index.js';
 // MORE IMPORTS HERE
 const days: Day[] = [
-    day0,
+    day01,
     // MORE DAYS HERE
 ];
 
