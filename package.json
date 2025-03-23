@@ -1,0 +1,24 @@
+{
+  "name": "advent-of-code-2024",
+  "version": "1.0.0",
+  "description": "Advent of code repository for year 2024. planning to use typescript\r link: https://adventofcode.com/2024/",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blitzdude/advent-of-code-2024.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blitzdude/advent-of-code-2024/issues"
+  },
+  "homepage": "https://github.com/Blitzdude/advent-of-code-2024#readme",
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
