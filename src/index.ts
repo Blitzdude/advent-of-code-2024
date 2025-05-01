@@ -1,3 +1,4 @@
+import { hello } from './helper.js'
 import { Day } from './day.js';
 import day01 from './day01/index.js';
 // MORE IMPORTS HERE
