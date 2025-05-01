@@ -50,13 +50,18 @@ async function createInputFiles() {
   const year = (new Date()).getFullYear();
 
   createFileWithContentIfItDoesntExist(
+    path.join(inputDayPath, "sample.txt"),
+    `{To get started, visit https://adventofcode.com/${year}/day/${day} and paste the sample data here}`
+  );
+
+  createFileWithContentIfItDoesntExist(
     path.join(inputDayPath, "part1.txt"),
     `{visit https://adventofcode.com/${year}/day/${day} and paste the part 1 input here}`
   );
 
   createFileWithContentIfItDoesntExist(
     path.join(inputDayPath, "part2.txt"),
-    `{After completing day 1, visit https://adventofcode.com/${year}/day/${day} and paste the part 2 input here}`
+    `{After completing part 1, visit https://adventofcode.com/${year}/day/${day} and paste the part 2 input here}`
   );
 }
 
