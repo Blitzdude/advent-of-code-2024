@@ -1,9 +1,10 @@
-import { hello } from './helper.js'
-import { Day } from './day.js';
-import day01 from './day01/index.js';
+import { Day } from './day';
+import day0 from './day0/index';
+import day1 from './day1/index';
 // MORE IMPORTS HERE
 const days: Day[] = [
-    day01,
+    day0,
+    day1,
     // MORE DAYS HERE
 ];
 

@@ -1,12 +1,9 @@
-import { Day } from "../day.js";
+import { Day } from "../day";
 
-class Day01 extends Day {
+class Day1 extends Day {
+
     constructor(){
         super(1);
-    }
-
-    solveForPartTest(input: string): string {
-        return input;
     }
 
     solveForPartOne(input: string): string {
@@ -18,4 +15,4 @@ class Day01 extends Day {
     }
 }
 
-export default new Day01;
+export default new Day1;
