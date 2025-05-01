@@ -7,7 +7,15 @@ abstract class Day {
     constructor(id: number){
         this.id = id;
     }
-    
+
+    async sample(): Promise<string> {
+        const content = await fs.promises.readFile(`./inputs/day${this.id}/sample.txt`);
+        const result = this.solveForSample(content.toString());
+        return result;
+    }   
+
+    abstract solveForSample(input: string) : string;
+
     async partOne(): Promise<string> {
         const content = await fs.promises.readFile(`./inputs/day${this.id}/part1.txt`);
         const result = this.solveForPartOne(content.toString());
