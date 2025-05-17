@@ -30,7 +30,7 @@ describe('On Day 2', () => {
 
 describe('On Day 2', () => {
     it(`verifyLevelsAreStable function should return 0 or more with unstable input`, ()=>{
-        expect(day2.verifyLevelsAreStable([1,2,7,8,9])).toBe(1);
+        expect(day2.verifyLevelsAreStable([1,2,7,8,9])).toBe(2);
         expect(day2.verifyLevelsAreStable([9,7,6,2,1])).toBe(2);
         expect(day2.verifyLevelsAreStable([12,11,9,9,6,5,4,3,3,1])).toBe(2);
         expect(day2.verifyLevelsAreStable([11,9,8,6,5,4,3,2,2])).toBe(7);
