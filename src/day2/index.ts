@@ -34,28 +34,23 @@ class Day2 extends Day {
             let levels = report.split(" ").map(Number);
             
             let anyOk = false
-            let monotone_idx = this.verifyLevelsAreMonotone(levels);
-            let stability_idx = this.verifyLevelsAreStable(levels);
 
-            if (monotone_idx == -1 && stability_idx == -1)
+            if (this.verifyLevelsAreMonotone(levels) == -1 && this.verifyLevelsAreStable(levels) == -1) {
                 anyOk = true;
-            else {
-                let idx_to_check = -1;
-
-                if (monotone_idx == -1)
-                    idx_to_check = stability_idx;
-                else if (stability_idx == -1)
-                    idx_to_check = monotone_idx;
-                else if (monotone_idx < stability_idx)
-                    idx_to_check = monotone_idx;
-
-                if (this.considerIfLevelsValid(levels, idx_to_check - 1)
-                    || this.considerIfLevelsValid(levels, idx_to_check)
-                    || this.considerIfLevelsValid(levels, idx_to_check + 1)) {
-                    anyOk = true;
-                }
-
             }
+            else {
+                // Check for possible safe levels by removing elements one at a time.
+                // TODO: This is a sort of brute force solution, but it works.
+                for (let i = 0; i < levels.length; i++) {
+                    let new_levels = levels.slice();
+                    new_levels.splice(i, 1);
+                    if (this.verifyLevelsAreMonotone(new_levels) == -1 && this.verifyLevelsAreStable(new_levels) == -1) {
+                        anyOk = true;
+                        break;
+                    }
+                }
+            }
+
             if (anyOk)
                 safe_reports += 1;
         });
@@ -63,7 +58,7 @@ class Day2 extends Day {
         return safe_reports.toString();
     }
 
-    // returns -1, if levels only increase/decrease.
+    // verify, that levels only increase or decrease. returns -1, if levels only increase/decrease. Otherwise returns and where problem was found.
     verifyLevelsAreMonotone(input: Array<number>): number {
         let is_increasing = true; // true means increasing, false means decreasing
 
@@ -89,7 +84,7 @@ class Day2 extends Day {
         return -1;
     }
 
-    // verify, that levels always change at least by 1 or 3. Returns -1 if safe, otherwise returns index of the element in levels.
+    // verify, that levels always change at least by 1 or 3. Returns -1 if safe, otherwise returns index of the element with problem.
     verifyLevelsAreStable(input: Array<number>): number {
 
         for (let i = 0; i <= input.length-1; i++) {
@@ -100,28 +95,6 @@ class Day2 extends Day {
             }
         }
         return -1;
-    }
-
-    // consider, if removing an element makes the levels pass the test.
-    // remove elements around the index and see if levels have no more problems.
-    considerIfLevelsValid(levels: Array<number>, idx: number): boolean {
-        // cannot check index out of range 
-        if (idx < 0 || idx >= levels.length)
-            return false;
-
-        let is_valid = true;
-        let new_levels = levels.slice()
-        new_levels.splice(idx, 1)
-
-        if (this.verifyLevelsAreMonotone(new_levels) >= 0) {
-            is_valid = false;
-        }
-        
-        if (this.verifyLevelsAreStable(new_levels) >= 0) {
-            is_valid = false;
-        };
-
-        return is_valid;
     }
 }
 
