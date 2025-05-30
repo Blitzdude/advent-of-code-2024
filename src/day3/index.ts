@@ -1,5 +1,6 @@
 import { strict } from "assert";
 import { Day } from "../day";
+import { isNumberObject } from "util/types";
 
 class Day3 extends Day {
 
@@ -8,7 +9,9 @@ class Day3 extends Day {
     }
 
     solveForSample(input: string): string {
-        return input;
+        let instructions = this.extractInstructions(input);
+        let result = this.multiplyUsingInstructions(instructions);
+        return result.toString();
     }
     
     solveForPartOne(input: string): string {
@@ -21,7 +24,7 @@ class Day3 extends Day {
 
     extractInstructions(input: string): Array<string> {
         let result: Array<string> = []
-        const matches = input.match(/mul\(\d,\d\)/)
+        const matches = input.match(/mul\(\d{1,3},\d{1,3}\)/g)
         if (matches) {
             matches.forEach(element => {
                 result.push(element);
@@ -29,6 +32,19 @@ class Day3 extends Day {
         }
 
         return result;
+    }
+
+    multiplyUsingInstructions(instructions: Array<string>): number {
+        let sumResult = 0;
+        instructions.forEach(ins => {
+            let x = Number(ins.match(/\d{1,3}/));
+
+            let y = Number(ins.match(/\d{1,3}(?=\)$)/));
+
+            sumResult += x * y;
+
+        });
+        return sumResult;
     }
 }
 

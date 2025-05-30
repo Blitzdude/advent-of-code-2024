@@ -12,9 +12,9 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\src\\index.ts",
+            "program": "${workspaceFolder}//src//index.ts",
             "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
-            "args": ["2", "true"],
+            "args": ["3", "true"],
             "console": "integratedTerminal",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
