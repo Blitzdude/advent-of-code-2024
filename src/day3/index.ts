@@ -15,11 +15,15 @@ class Day3 extends Day {
     }
     
     solveForPartOne(input: string): string {
-        return input;
+        let instructions = this.extractInstructions(input);
+        let result = this.multiplyUsingInstructions(instructions);
+        return result.toString();
     }
 
     solveForPartTwo(input: string): string {
-        return input;
+        let instructions = this.extractInstructions(input);
+        let result = this.multiplyUsingInstructions(instructions);
+        return result.toString();
     }
 
     extractInstructions(input: string): Array<string> {
