@@ -1,6 +1,4 @@
-import { strict } from "assert";
 import { Day } from "../day";
-import { isNumberObject } from "util/types";
 
 class Day3 extends Day {
 
@@ -10,25 +8,28 @@ class Day3 extends Day {
 
     solveForSample(input: string): string {
         let instructions = this.extractInstructions(input);
-        let result = this.multiplyUsingInstructions(instructions);
-        return result.toString();
+        let result1 = this.runMultiplication(instructions);
+        let result2 = this.runMultiplicationWithSwitching(instructions);
+
+        return `part1: ${result1.toString()} par22: ${result2.toString()}`
     }
     
     solveForPartOne(input: string): string {
         let instructions = this.extractInstructions(input);
-        let result = this.multiplyUsingInstructions(instructions);
+        let result = this.runMultiplication(instructions);
         return result.toString();
     }
 
     solveForPartTwo(input: string): string {
         let instructions = this.extractInstructions(input);
-        let result = this.multiplyUsingInstructions(instructions);
+        let result = this.runMultiplicationWithSwitching(instructions);
         return result.toString();
     }
 
     extractInstructions(input: string): Array<string> {
         let result: Array<string> = []
-        const matches = input.match(/mul\(\d{1,3},\d{1,3}\)/g)
+        // Match mul(xxx,yyy), don't() and do() instructions
+        const matches = input.match(/mul\(\d{1,3},\d{1,3}\)|don't\(\)|do\(\)/g)
         if (matches) {
             matches.forEach(element => {
                 result.push(element);
@@ -38,18 +39,41 @@ class Day3 extends Day {
         return result;
     }
 
-    multiplyUsingInstructions(instructions: Array<string>): number {
+    runMultiplication(instructions: Array<string>): number {
         let sumResult = 0;
         instructions.forEach(ins => {
-            let x = Number(ins.match(/\d{1,3}/));
-
-            let y = Number(ins.match(/\d{1,3}(?=\)$)/));
-
-            sumResult += x * y;
+            if (ins.match(/mul\(\d{1,3},\d{1,3}\)/)) {
+                
+                let x = Number(ins.match(/\d{1,3}/));
+                let y = Number(ins.match(/\d{1,3}(?=\)$)/));
+                sumResult += x * y;
+            }
 
         });
         return sumResult;
     }
+
+    runMultiplicationWithSwitching(instructions: Array<string>): number {
+        let sumResult = 0;
+        let doMultiplication = true;
+
+        instructions.forEach(ins => {
+            if (doMultiplication == true && ins.match(/don't\(\)/)) {
+                doMultiplication = false;
+            }
+            else if (doMultiplication == false && ins.match(/do\(\)/)) {
+                doMultiplication = true;
+            }
+            else if (doMultiplication == true && ins.match(/mul\(\d{1,3},\d{1,3}\)/)) {
+                let x = Number(ins.match(/\d{1,3}/));
+                let y = Number(ins.match(/\d{1,3}(?=\)$)/));
+                sumResult += x * y;
+            }
+        });
+
+        return sumResult;
+    }
+    
 }
 
 export default new Day3;
